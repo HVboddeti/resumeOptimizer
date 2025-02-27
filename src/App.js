@@ -19,7 +19,7 @@ function App() {
         formData.append("job_description", jobDescription);
 
         try {
-            const response = await fetch("arn:aws:apigateway:us-east-1::/apis/fydmifnj79/routes/9fpcb35", {
+            const response = await fetch("https://fydmifnj79.execute-api.us-east-1.amazonaws.com", {
                 method: "POST",
                 body: formData
             });

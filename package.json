@@ -1,20 +1,31 @@
 {
-    "name": "resume-optimizer",
-    "version": "1.0.0",
-    "description": "AWS-powered Resume Optimization App",
-    "main": "index.js",
-    "dependencies": {
-      "react": "^18.0.0",
-      "react-dom": "^18.0.0",
-      "react-scripts": "latest"
-    },
-    "scripts": {
-      "start": "react-scripts start",
-      "build": "react-scripts build",
-      "test": "react-scripts test",
-      "eject": "react-scripts eject"
-    },
-    "author": "Your Name",
-    "license": "MIT"
+  "name": "resume-optimizer",
+  "version": "1.0.0",
+  "description": "AWS-powered Resume Optimization App",
+  "main": "index.js",
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-scripts": "latest"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
-  
+}

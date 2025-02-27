@@ -19,7 +19,7 @@ function App() {
         formData.append("job_description", jobDescription);
 
         try {
-            const response = await fetch("https://fydmifnj79.execute-api.us-east-1.amazonaws.com", {
+            const response = await fetch("https://warfu0feja.execute-api.us-east-1.amazonaws.com/Dev", {
                 method: "POST",
                 body: formData
             });

@@ -19,7 +19,7 @@ function App() {
         formData.append("job_description", jobDescription);
 
         try {
-            const response = await fetch("https://b1qyocwv91.execute-api.us-east-1.amazonaws.com/start", {
+            const response = await fetch("https://b1qyocwv91.execute-api.us-east-1.amazonaws.com/start/resume-processing-lambda", {
                 method: "POST",
                 body: formData
             });

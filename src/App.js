@@ -8,12 +8,15 @@ function App() {
     const [resume, setResume] = useState(null);
     const [jobDescription, setJobDescription] = useState("");
     const [enhancedResumeUrl, setEnhancedResumeUrl] = useState("");
+    const [loading, setLoading] = useState(false);  // ✅ Add loading state
 
     const handleUpload = async () => {
         if (!resume || !jobDescription) {
             alert("Please upload a resume and enter a job description.");
             return;
         }
+
+        setLoading(true);  // ✅ Show loading indicator
 
         // ✅ Convert file to Base64
         const convertToBase64 = (file) => {
@@ -30,8 +33,9 @@ function App() {
 
             const payload = {
                 bucket: "resumestorage-bucket",
-                tex_file: resume.name,  // Send .tex file instead of file_name
-                job_description: jobDescription
+                file_name: resume.name,
+                job_description: jobDescription,
+                resume_content: resumeBase64 // Pass Base64 content
             };
 
             const response = await fetch("https://t9qpgcd3w3.execute-api.us-east-1.amazonaws.com/start/processResume", {
@@ -39,7 +43,6 @@ function App() {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                mode: "cors",
                 body: JSON.stringify(payload)
             });
 
@@ -51,6 +54,9 @@ function App() {
             }
         } catch (error) {
             console.error("Error uploading resume:", error);
+            alert("Failed to process resume. Please try again.");
+        } finally {
+            setLoading(false);  // ✅ Hide loading indicator
         }
     };
 
@@ -59,9 +65,15 @@ function App() {
             <h1>Resume Optimizer</h1>
             <ResumeUpload setResume={setResume} />
             <JobDescriptionInput setJobDescription={setJobDescription} />
-            <button onClick={handleUpload} style={{ marginTop: "20px", padding: "10px 20px" }}>
-                Optimize Resume
+            
+            <button 
+                onClick={handleUpload} 
+                style={{ marginTop: "20px", padding: "10px 20px" }} 
+                disabled={loading}  // ✅ Disable button while loading
+            >
+                {loading ? "Processing..." : "Optimize Resume"}  {/* ✅ Show running time */}
             </button>
+
             <ResultDisplay enhancedResumeUrl={enhancedResumeUrl} />
         </div>
     );

@@ -10,7 +10,15 @@ function App() {
     const [enhancedResumeUrl, setEnhancedResumeUrl] = useState("");
     const [loading, setLoading] = useState(false);  // ✅ Add loading state
 
-
+    const convertToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result.split(",")[1]); // Extract base64 content
+            reader.onerror = (error) => reject(error);
+        });
+    };
+    
 
     const handleUpload = async () => {
         if (!resume || !jobDescription) {

@@ -10,7 +10,7 @@ function App() {
     const [enhancedResumeUrl, setEnhancedResumeUrl] = useState("");
     const [loading, setLoading] = useState(false);  // ✅ Add loading state
 
-    const [loading, setLoading] = useState(false); // Add loading state
+
 
     const handleUpload = async () => {
         if (!resume || !jobDescription) {

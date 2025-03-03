@@ -10,6 +10,8 @@ function App() {
     const [enhancedResumeUrl, setEnhancedResumeUrl] = useState("");
     const [loading, setLoading] = useState(false);  // ✅ Add loading state
 
+    const [loading, setLoading] = useState(false); // Add loading state
+
     const handleUpload = async () => {
         if (!resume || !jobDescription) {
             alert("Please upload a resume and enter a job description.");
@@ -18,28 +20,17 @@ function App() {
     
         setLoading(true);  // ✅ Show loading indicator
     
-        // ✅ Convert file to Base64
-        const convertToBase64 = (file) => {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result.split(",")[1]); // Extract base64 content
-                reader.onerror = (error) => reject(error);
-            });
-        };
-    
         try {
-            const resumeBase64 = await convertToBase64(resume); // Convert file
-    
+            const resumeBase64 = await convertToBase64(resume);
             const payload = {
                 bucket: "resumestorage-bucket",
                 file_name: resume.name,
-                tex_file: "main.tex",  // ✅ Ensure tex_file is included
+                tex_file: "main.tex",  // ✅ Ensure this field is sent
                 job_description: jobDescription,
-                resume_content: resumeBase64 // Pass Base64 content
+                resume_content: resumeBase64
             };
     
-            console.log("📤 Sending request with payload:", payload); // ✅ Debugging
+            console.log("📤 Sending request with payload:", payload);
     
             const response = await fetch("https://t9qpgcd3w3.execute-api.us-east-1.amazonaws.com/start/processResume", {
                 method: "POST",
@@ -49,10 +40,8 @@ function App() {
                 body: JSON.stringify(payload)
             });
     
-            console.log("📥 Received response:", response);
-    
             const data = await response.json();
-            console.log("✅ API Response Data:", data);
+            console.log("✅ Response received:", data);
     
             if (data.enhanced_resume_url) {
                 setEnhancedResumeUrl(data.enhanced_resume_url);

@@ -62,13 +62,9 @@ function App() {
             <ResumeUpload setResume={setResume} />
             <JobDescriptionInput setJobDescription={setJobDescription} />
             
-            <button 
-                onClick={handleUpload} 
-                style={{ marginTop: "20px", padding: "10px 20px" }} 
-                disabled={loading}  // ✅ Disable button while loading
-            >
-                {loading ? "Processing..." : "Optimize Resume"}  {/* ✅ Show running time */}
-            </button>
+            <button onClick={handleUpload} disabled={loading} style={{ marginTop: "20px", padding: "10px 20px" }}>
+    {loading ? "Processing..." : "Optimize Resume"}
+</button>
 
             <ResultDisplay enhancedResumeUrl={enhancedResumeUrl} />
         </div>

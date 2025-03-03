@@ -30,9 +30,8 @@ function App() {
 
             const payload = {
                 bucket: "resumestorage-bucket",
-                file_name: resume.name,
-                job_description: jobDescription,
-                resume_content: resumeBase64 // Pass Base64 content
+                tex_file: resume.name,  // Send .tex file instead of file_name
+                job_description: jobDescription
             };
 
             const response = await fetch("https://t9qpgcd3w3.execute-api.us-east-1.amazonaws.com/start/processResume", {
